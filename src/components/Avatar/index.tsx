@@ -22,6 +22,7 @@ const Avatar: React.FC<AvatarProps> = ({
     const { container, font } = avatarSizeMap[size];
     const bgColor = backgroundColor ?? getAvatarColor(name);
     const letter = name?.trim()?.[0] ?? '?';
+    const letter2 = name?.trim()?.[1] ?? '?';
 
     return (
         <View
@@ -36,7 +37,7 @@ const Avatar: React.FC<AvatarProps> = ({
             ]}
         >
             <Text style={[styles.letter, { fontSize: font }]}>
-                {letter}
+                {letter}{letter2}
             </Text>
         </View>
     );

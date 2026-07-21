@@ -4,10 +4,10 @@ import { moderateScale } from 'react-native-size-matters';
 
 export const styles = StyleSheet.create({
     container: {
-        backgroundColor: colors.backgroundLightBlue,
+        backgroundColor: colors.lightGray,
         height: moderateScale(40),
         width: moderateScale(40),
-        borderRadius: moderateScale(12),
+        borderRadius: moderateScale(20),
         justifyContent: 'center',
         alignItems: 'center',
     },

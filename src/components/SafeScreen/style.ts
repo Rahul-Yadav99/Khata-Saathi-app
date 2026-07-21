@@ -5,7 +5,7 @@ import { moderateScale } from 'react-native-size-matters';
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.white,
+        backgroundColor: colors.backgroundColor,
         paddingHorizontal: moderateScale(16)
     },
 });

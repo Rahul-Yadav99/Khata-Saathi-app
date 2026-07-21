@@ -51,73 +51,73 @@ interface ToastContextValue {
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
-const VARIANT_CONFIG: Record<
-    ToastVariant,
-    { bg: string; border: string; icon: React.ElementType; iconBg: string; textColor: string }
-> = {
-    success: {
-        bg: '#F0FDF4',
-        border: '#22C55E',
-        icon: Check,
-        iconBg: '#22C55E',
-        textColor: '#166534',
-    },
-    error: {
-        bg: '#FFF1F2',
-        border: '#EF4444',
-        icon: X,
-        iconBg: '#EF4444',
-        textColor: '#991B1B',
-    },
-    warning: {
-        bg: '#FFFBEB',
-        border: '#F59E0B',
-        icon: AlertTriangle,
-        iconBg: '#F59E0B',
-        textColor: '#92400E',
-    },
-    info: {
-        bg: '#EFF6FF',
-        border: colors.primaryColor,
-        icon: Info,
-        iconBg: colors.primaryColor,
-        textColor: '#1E40AF',
-    },
-};
-
 // const VARIANT_CONFIG: Record<
 //     ToastVariant,
 //     { bg: string; border: string; icon: React.ElementType; iconBg: string; textColor: string }
 // > = {
 //     success: {
-//         bg: colors.white,
-//         border: colors.primaryColor,
+//         bg: '#F0FDF4',
+//         border: '#22C55E',
 //         icon: Check,
-//         iconBg: colors.primaryColor,
-//         textColor: colors.primaryTextColor,
+//         iconBg: '#22C55E',
+//         textColor: '#166534',
 //     },
 //     error: {
-//         bg: colors.white,
-//         border: colors.primaryColor,
+//         bg: '#FFF1F2',
+//         border: '#EF4444',
 //         icon: X,
-//         iconBg: colors.primaryColor,
-//         textColor: colors.primaryTextColor,
+//         iconBg: '#EF4444',
+//         textColor: '#991B1B',
 //     },
 //     warning: {
-//         bg: colors.white,
-//         border: colors.primaryColor,
+//         bg: '#FFFBEB',
+//         border: '#F59E0B',
 //         icon: AlertTriangle,
-//         iconBg: colors.primaryColor,
-//         textColor: colors.primaryTextColor,
+//         iconBg: '#F59E0B',
+//         textColor: '#92400E',
 //     },
 //     info: {
-//         bg: colors.white,
+//         bg: '#EFF6FF',
 //         border: colors.primaryColor,
 //         icon: Info,
 //         iconBg: colors.primaryColor,
-//         textColor: colors.primaryTextColor,
+//         textColor: '#1E40AF',
 //     },
 // };
+
+const VARIANT_CONFIG: Record<
+    ToastVariant,
+    { bg: string; border: string; icon: React.ElementType; iconBg: string; textColor: string }
+> = {
+    success: {
+        bg: colors.white,
+        border: colors.primaryColor,
+        icon: Check,
+        iconBg: colors.primaryColor,
+        textColor: colors.primaryTextColor,
+    },
+    error: {
+        bg: colors.white,
+        border: colors.primaryColor,
+        icon: X,
+        iconBg: colors.primaryColor,
+        textColor: colors.primaryTextColor,
+    },
+    warning: {
+        bg: colors.white,
+        border: colors.primaryColor,
+        icon: AlertTriangle,
+        iconBg: colors.primaryColor,
+        textColor: colors.primaryTextColor,
+    },
+    info: {
+        bg: colors.white,
+        border: colors.primaryColor,
+        icon: Info,
+        iconBg: colors.primaryColor,
+        textColor: colors.primaryTextColor,
+    },
+};
 
 // ─── Single Toast Item ────────────────────────────────────────────────────────
 

@@ -1,15 +1,15 @@
 import { moderateScale } from "react-native-size-matters";
 
 export const colors = {
-    primaryColor: "#4F46E5",
+    primaryColor: "#1A1A1A",
     placeholderColor: "#9CA3AF",
     disabledColor: "#D1D5DB",
-    primaryTextColor: "#404040",
-    secondaryTextColor: "#737373",
+    primaryTextColor: "#1A1A1A",
+    secondaryTextColor: "#9B9B9B",
     backgroundGray: '#f5f5f5',
-    backgroundColor: '#E1EAFC',
+    backgroundColor: '#fcfcfa',
     accentColor: "#FF7A00",
-    white: '#ffffff',
+    white: '#FFFFFF',
     backgroundLightBlue: '#EEF2FF',
     backgroundGreen: '#e8f5e8',
     backgroundRed: '#FFE4E6',
@@ -17,7 +17,9 @@ export const colors = {
     bgRed: '#FFF1F2',
     red: '#EF4444',
     bgGreen: '#F0FDF4',
-    green: '#22C55E',
+    green: '#0FA958',
+    lightGray: '#f0efeb',
+    darkGray: '#4A4A4A'
 }
 
 export const spacing = {

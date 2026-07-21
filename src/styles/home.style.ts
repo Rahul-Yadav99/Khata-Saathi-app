@@ -7,7 +7,6 @@ export const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: spacing.md,
-        backgroundColor:'white'
     },
     boxContainer: {
         flexDirection: "row",

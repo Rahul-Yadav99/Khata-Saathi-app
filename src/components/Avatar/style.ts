@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
         overflow: 'hidden',
     },
     letter: {
-        color: '#FFFFFF',
+        color: colors.white,
         fontWeight: '700',
         textTransform: 'uppercase',
     },
