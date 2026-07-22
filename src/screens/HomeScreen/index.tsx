@@ -1,13 +1,16 @@
 import partyService from '@/api/partyService'
 import CloseButton from '@/components/CloseButton'
 import CustomerCard from '@/components/CustomerCard'
+import CustomerCardSkeletonList from '@/components/CustomerCardSkeleton'
 import Header from '@/components/Header'
 import SafeScreen from '@/components/SafeScreen'
-import { Button, Input } from '@/components/ui'
+import { Button, EmptyState, ErrorState, Input } from '@/components/ui'
 import { ToastOverlay, useToast } from '@/components/ui/Toast'
 import { colors, spacing } from '@/theme/designSystem'
 import { typography } from '@/theme/typography'
+import { formatIndianCurrency } from '@/utils/formatIndianCurrency'
 import { useMutation, useQuery } from '@tanstack/react-query'
+import { Users2 } from 'lucide-react-native'
 import { useState } from 'react'
 import { FlatList, Modal, RefreshControl, Text, View } from 'react-native'
 import { moderateScale } from 'react-native-size-matters'
@@ -20,7 +23,7 @@ const HomeScreen = () => {
     const [partyName, setPartyName] = useState('');
     const [partyPhone, setPartyPhone] = useState('');
 
-    const { data, refetch } = useQuery({
+    const { data, refetch, isLoading, isError } = useQuery({
         queryKey: ['getAllCustomers'],
         queryFn: () => partyService.getAllParties()
     })
@@ -71,7 +74,7 @@ const HomeScreen = () => {
     return (
         <SafeScreen edges={['top', 'bottom']}>
             <FlatList
-                data={data?.data}
+                data={data?.data ?? []}
                 keyExtractor={(item) => item._id}
                 renderItem={({ item }) => (
                     <CustomerCard item={item} />
@@ -81,7 +84,9 @@ const HomeScreen = () => {
                         <Header onPress={() => setVisible(true)} />
                         <View style={styles.priceContainer}>
                             <Text style={styles.personalText}>You have to Collect</Text>
-                            <Text numberOfLines={2} style={styles.priceText}>₹12,009</Text>
+                            <Text numberOfLines={2} style={styles.priceText}>
+                                {`${formatIndianCurrency(data?.totalCurrentBalance || 0)}`}
+                            </Text>
                         </View>
                     </>
                 }
@@ -92,6 +97,22 @@ const HomeScreen = () => {
                     <RefreshControl refreshing={false} onRefresh={refetch} colors={[colors.primaryColor]} />
                 }
                 showsVerticalScrollIndicator={false}
+                ListEmptyComponent={
+                    isLoading ?
+                        <CustomerCardSkeletonList count={8} />
+                        :
+                        isError ?
+                            <ErrorState
+                                title='Failed to fetch customers' onRetry={refetch} />
+                            :
+                            <EmptyState
+                                title='No Customers'
+                                description='Add your first customer to get started'
+                                icon={<Users2 size={moderateScale(48)} color={colors.secondaryTextColor} />}
+                                actionLabel='Add Customer'
+                                onAction={() => setVisible(true)}
+                            />
+                }
             />
 
             <Modal

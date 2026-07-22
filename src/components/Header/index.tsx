@@ -4,11 +4,16 @@ import { TouchableOpacity, View } from 'react-native'
 import Avatar from '../Avatar'
 import { styles } from './style'
 
-const Header = ({onPress}: {onPress: () => void}) => {
+const Header = ({ onPress }: { onPress: () => void }) => {
     return (
         <View style={styles.header}>
             <Avatar name="Rahul" size='sm' backgroundColor={colors.primaryColor} />
-            <TouchableOpacity activeOpacity={0.7} style={styles.plusContainer} onPress={onPress}>
+            <TouchableOpacity
+                hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                activeOpacity={0.7}
+                style={styles.plusContainer}
+                onPress={onPress}
+            >
                 <Plus color={colors.darkGray} size={spacing.md} />
             </TouchableOpacity>
         </View>
