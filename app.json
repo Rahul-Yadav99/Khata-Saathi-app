@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "khata_saathi_app",
+    "name": "Khata Saathi",
     "slug": "khata_saathi_app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -33,7 +33,8 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
         }
-      ]
+      ],
+      "@react-native-community/datetimepicker"
     ],
     "experiments": {
       "typedRoutes": true,

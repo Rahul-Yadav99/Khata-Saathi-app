@@ -1,9 +1,9 @@
 import { colors, spacing } from '@/theme/designSystem'
-import { X } from 'lucide-react-native'
+import { ChevronDown, X } from 'lucide-react-native'
 import { TouchableOpacity } from 'react-native'
 import { styles } from './style'
 
-const CloseButton = ({onPress}: {onPress: () => void}) => {
+const CloseButton = ({ onPress, isModal }: { onPress: () => void, isModal: boolean }) => {
     return (
         <TouchableOpacity
             style={styles.container}
@@ -11,7 +11,8 @@ const CloseButton = ({onPress}: {onPress: () => void}) => {
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
             onPress={onPress}
         >
-            <X size={spacing.md} color={colors.primaryColor} />
+            {isModal ? <ChevronDown size={spacing.md} color={colors.primaryColor} /> : <X size={spacing.md} color={colors.primaryColor} />}
+
         </TouchableOpacity>
     )
 }

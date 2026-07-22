@@ -11,7 +11,8 @@ export const styles = StyleSheet.create({
     },
     partyName: {
         ...typography.h5,
-        color: colors.primaryTextColor
+        color: colors.primaryTextColor,
+        textTransform:'capitalize'
     },
     date: {
         ...typography.body

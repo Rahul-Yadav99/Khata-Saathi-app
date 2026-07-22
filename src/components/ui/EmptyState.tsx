@@ -1,9 +1,9 @@
-import React from 'react';
-import { View, Text, StyleSheet, ViewStyle } from 'react-native';
-import { Inbox } from 'lucide-react-native';
-import { moderateScale } from 'react-native-size-matters';
 import { colors, spacing } from '@/theme/designSystem';
 import { typography } from '@/theme/typography';
+import { Inbox } from 'lucide-react-native';
+import React from 'react';
+import { StyleSheet, Text, View, ViewStyle } from 'react-native';
+import { moderateScale } from 'react-native-size-matters';
 import Button from './Button';
 
 interface EmptyStateProps {
@@ -31,12 +31,13 @@ const EmptyState: React.FC<EmptyStateProps> = ({
             <Text style={styles.title}>{title}</Text>
             {description && <Text style={styles.description}>{description}</Text>}
             {actionLabel && onAction && (
-                <Button 
-                    title={actionLabel} 
-                    onPress={onAction} 
-                    variant="secondary" 
-                    style={styles.actionButton} 
+                <Button
+                    title={actionLabel}
+                    onPress={onAction}
+                    variant="secondary"
+                    style={styles.actionButton}
                     fullWidth={false}
+                    size='small'
                 />
             )}
         </View>

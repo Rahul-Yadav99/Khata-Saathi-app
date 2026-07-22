@@ -124,7 +124,7 @@ const HomeScreen = () => {
                 <SafeScreen edges={['top', 'bottom']}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: spacing.sm, marginVertical: spacing.md }}>
                         <Text style={{ ...typography.h4 }}>Add New Customer</Text>
-                        <CloseButton onPress={() => { setVisible(false), setPartyName(''), setPartyPhone('') }} />
+                        <CloseButton isModal={true} onPress={() => { setVisible(false), setPartyName(''), setPartyPhone('') }} />
                     </View>
                     <Input
                         label='Customer Name'

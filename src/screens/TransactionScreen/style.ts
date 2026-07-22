@@ -6,7 +6,8 @@ import { moderateScale } from "react-native-size-matters";
 export const styles = StyleSheet.create({
     userName: {
         ...typography.h5,
-        color: colors.primaryTextColor
+        color: colors.primaryTextColor,
+        textTransform: 'capitalize'
     },
     userNameContainer: {
         flexDirection: 'row',
@@ -17,7 +18,7 @@ export const styles = StyleSheet.create({
         marginVertical: spacing.md,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     personalText: {
         ...typography.body,
@@ -52,5 +53,18 @@ export const styles = StyleSheet.create({
     },
     iconText: {
         ...typography.body
+    },
+    modalTitle: {
+        ...typography.h4
+    },
+    dateContainer: {
+        backgroundColor: colors.lightGray,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: moderateScale(25),
+        height: moderateScale(50),
+        width: moderateScale(50),
+        marginBottom:spacing.md
     }
 });
