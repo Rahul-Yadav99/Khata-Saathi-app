@@ -25,12 +25,12 @@ const TransactionScreen = ({ partyId }: any) => {
         {
             title: 'You gave',
             icon: <BanknoteArrowUp color={colors.primaryColor} />,
-            onPress: () => { setVisible(true); setTransactionType('debit') }
+            onPress: () => { setVisible(true); setTransactionType('gave') }
         },
         {
             title: 'You got',
             icon: <BanknoteArrowDown color={colors.primaryColor} />,
-            onPress: () => { setVisible(true); setTransactionType('credit') }
+            onPress: () => { setVisible(true); setTransactionType('got') }
         },
         {
             title: 'More',
@@ -49,6 +49,8 @@ const TransactionScreen = ({ partyId }: any) => {
         queryKey: ['getAllTransactions', partyId],
         queryFn: () => transactionService.getTransaction(partyId),
     })
+
+    console.log('data----->', data)
 
     const handleAddTransaction = () => {
         if (!transactionAmount || transactionAmount.trim() === '') {
@@ -106,6 +108,7 @@ const TransactionScreen = ({ partyId }: any) => {
         setVisible(false);
         setTransactionAmount('');
         setTransactionType('');
+        setDescription('');
         setTransactionDate(new Date());
         setShowDate(false);
     }
@@ -131,8 +134,7 @@ const TransactionScreen = ({ partyId }: any) => {
                     <>
                         <View style={styles.priceContainer}>
                             <Text style={styles.personalText}>{data?.party?.currentBalance > 0 ? "You have to Collect" : "You have to Pay"}</Text>
-                            <Text numberOfLines={2} style={styles.priceText}>
-                                {`${data?.party?.currentBalance > 0 ? "+" : "-"}${formatIndianCurrency(Math.abs(data?.party?.currentBalance || 0))}`}
+                            <Text numberOfLines={2} style={styles.priceText}>{formatIndianCurrency(Math.abs(data?.party?.currentBalance || 0))}
                             </Text>
                         </View>
 
@@ -167,8 +169,8 @@ const TransactionScreen = ({ partyId }: any) => {
                                 title='No Transactions'
                                 description='Add your first transaction to get started'
                                 icon={<ReceiptIndianRupeeIcon size={moderateScale(58)} color={colors.secondaryTextColor} />}
-                                actionLabel='Add Transaction'
-                                onAction={() => { setVisible(true) }}
+                            // actionLabel='Add Transaction'
+                            // onAction={() => { setVisible(true) }}
                             />
                 }
             />
@@ -180,7 +182,7 @@ const TransactionScreen = ({ partyId }: any) => {
             >
                 <SafeScreen edges={['top', 'bottom']}>
                     <View style={styles.header}>
-                        <Text style={styles.modalTitle}>You {transactionType === 'credit' ? 'got' : 'gave'} {transactionAmount ? formatIndianCurrency(Number(transactionAmount)) : "0"} {transactionType === 'credit' ? 'from' : 'to'} {data?.party?.partyName || "Customer"}</Text>
+                        <Text style={styles.modalTitle}>You {transactionType === 'got' ? 'got' : 'gave'} {transactionAmount ? formatIndianCurrency(Number(transactionAmount)) : "0"} {transactionType === 'got' ? 'from' : 'to'} {data?.party?.partyName || "Customer"}</Text>
                         <CloseButton onPress={handleCloseModal} isModal={true} />
                     </View>
                     <Input

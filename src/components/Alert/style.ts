@@ -1,7 +1,7 @@
+import { colors, fontSize, spacing } from '@/theme/designSystem';
+import { typography } from '@/theme/typography';
 import { StyleSheet } from 'react-native';
 import { moderateScale } from 'react-native-size-matters';
-import { colors, spacing, fontSize } from '@/theme/designSystem';
-import { typography } from '@/theme/typography';
 
 export const styles = StyleSheet.create({
   // Overlay - semi-transparent background
@@ -96,7 +96,7 @@ export const styles = StyleSheet.create({
 
   // Active state styling for confirm button
   confirmButtonActive: {
-    backgroundColor: '#4338CA',
+    backgroundColor: colors.secondaryTextColor,
     opacity: 0.85,
   },
 });
