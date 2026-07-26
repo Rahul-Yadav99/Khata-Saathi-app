@@ -17,13 +17,14 @@ export const styles = StyleSheet.create({
     },
 });
 
-export type AvatarSize = 'sm' | 'md' | 'lg' | 'xl';
+export type AvatarSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 
 export const avatarSizeMap: Record<AvatarSize, { container: number; font: number }> = {
     sm: { container: moderateScale(32), font: fontSize.sm },
     md: { container: moderateScale(44), font: fontSize.lg },
     lg: { container: moderateScale(56), font: fontSize.xxl },
     xl: { container: moderateScale(72), font: moderateScale(28) },
+    xxl: { container: moderateScale(100), font: moderateScale(40) },
 };
 
 /** Generate a consistent background color based on the name */

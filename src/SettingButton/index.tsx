@@ -4,11 +4,11 @@ import { Settings2 } from 'lucide-react-native'
 import { TouchableOpacity } from 'react-native'
 import { styles } from './style'
 
-const SettingButton = () => {
+const SettingButton = ({ partyId }: { partyId: string }) => {
     const router = useRouter();
     return (
         <TouchableOpacity
-            onPress={() => router.back()}
+            onPress={() => router.push(`/partyProfile/${partyId}`)}
             style={styles.container}
             activeOpacity={0.7}
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}

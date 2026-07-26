@@ -3,19 +3,20 @@ import Alert from '@/components/Alert'
 import CloseButton from '@/components/CloseButton'
 import GoBackButton from '@/components/GoBackButton'
 import SafeScreen from '@/components/SafeScreen'
-import { Button, Input, useToast } from '@/components/ui'
+import TransactionDetailSkeleton from '@/components/TransactionDetailSkeleton'
+import { Button, ErrorState, Input, useToast } from '@/components/ui'
 import { ToastOverlay } from '@/components/ui/Toast'
 import { colors, spacing } from '@/theme/designSystem'
 import { formatIndianCurrency } from '@/utils/formatIndianCurrency'
 import { formatTransactionDate } from '@/utils/formatTransactionDate'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useRouter } from 'expo-router'
 import { Calendar1, Trash2 } from 'lucide-react-native'
 import { useEffect, useState } from 'react'
-import { ActivityIndicator, Modal, Text, TouchableOpacity, View } from 'react-native'
+import { Modal, Text, TouchableOpacity, View } from 'react-native'
 import { moderateScale } from 'react-native-size-matters'
 import { styles } from './style'
-import { useRouter } from 'expo-router'
 
 const TransactionDetailScreen = ({ transactionId }: any) => {
     const toast = useToast()
@@ -28,7 +29,7 @@ const TransactionDetailScreen = ({ transactionId }: any) => {
     const [transactionDate, setTransactionDate] = useState(new Date())
     const [deleteModalVisible, setDeleteModalVisible] = useState(false)
 
-    const { data, isLoading } = useQuery({
+    const { data, isLoading, isError } = useQuery({
         queryKey: ['getTransactionById', transactionId],
         queryFn: () => transactionService.getTransactionById(transactionId)
     })
@@ -128,55 +129,57 @@ const TransactionDetailScreen = ({ transactionId }: any) => {
             </View>
 
             {isLoading ? (
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <ActivityIndicator size={moderateScale(35)} color={colors.primaryColor} />
-                </View>
-            ) : (
-                <>
-                    <View style={styles.priceContainer}>
-                        <Text style={styles.personalText}>Transaction Amount</Text>
-                        <Text numberOfLines={2} style={styles.priceText}>
-                            {formatIndianCurrency(Math.abs(data?.data?.transactionAmount || 0))}
-                        </Text>
-                    </View>
-                    <View style={styles.balanceContainer}>
-                        <Text style={styles.personalText}>Balance after transaction:</Text>
-                        <Text style={styles.personalText}>
-                            {formatIndianCurrency(Math.abs(data?.data?.balanceAfterTransaction || 0))}
-                        </Text>
-                    </View>
-                    <View style={styles.balanceContainer}>
-                        <Text style={styles.personalText}>Transaction Type:</Text>
-                        <Text style={[styles.personalText, { textTransform: 'capitalize' }]}>
-                            {data?.data?.transactionType === 'got' ? 'You Got' : 'You Gave'}
-                        </Text>
-                    </View>
-                    {data?.data?.description && (
-                        <View style={styles.balanceContainer}>
-                            <Text style={styles.personalText}>Note:</Text>
-                            <Text style={[styles.personalText, { textTransform: 'capitalize' }]}>
-                                {data?.data?.description}
-                            </Text>
-                        </View>
+                <TransactionDetailSkeleton />
+            ) :
+                isError ? (
+                    <ErrorState />
+                ) :
+                    (
+                        <>
+                            <View style={styles.priceContainer}>
+                                <Text style={styles.personalText}>Transaction Amount</Text>
+                                <Text numberOfLines={2} style={styles.priceText}>
+                                    {formatIndianCurrency(Math.abs(data?.data?.transactionAmount || 0))}
+                                </Text>
+                            </View>
+                            <View style={styles.balanceContainer}>
+                                <Text style={styles.personalText}>Balance after transaction:</Text>
+                                <Text style={styles.personalText}>
+                                    {formatIndianCurrency(Math.abs(data?.data?.balanceAfterTransaction || 0))}
+                                </Text>
+                            </View>
+                            <View style={styles.balanceContainer}>
+                                <Text style={styles.personalText}>Transaction Type:</Text>
+                                <Text style={[styles.personalText, { textTransform: 'capitalize' }]}>
+                                    {data?.data?.transactionType === 'got' ? 'You Got' : 'You Gave'}
+                                </Text>
+                            </View>
+                            {data?.data?.description && (
+                                <View style={styles.balanceContainer}>
+                                    <Text style={styles.personalText}>Note:</Text>
+                                    <Text style={[styles.personalText, { textTransform: 'capitalize' }]}>
+                                        {data?.data?.description}
+                                    </Text>
+                                </View>
+                            )}
+                            <View style={styles.balanceContainer}>
+                                <Text style={styles.personalText}>Transaction Date:</Text>
+                                <Text style={styles.personalText}>
+                                    {formatTransactionDate(data?.data?.transactionDate)}
+                                </Text>
+                            </View>
+                            <View style={styles.buttonContainer}>
+                                <Button
+                                    title='Edit Transaction'
+                                    onPress={() => setVisible(true)}
+                                    style={{ width: '80%' }}
+                                />
+                                <TouchableOpacity onPress={() => setDeleteModalVisible(true)} activeOpacity={0.7} style={styles.deleteButton}>
+                                    <Trash2 size={spacing.md} color={colors.white} />
+                                </TouchableOpacity>
+                            </View>
+                        </>
                     )}
-                    <View style={styles.balanceContainer}>
-                        <Text style={styles.personalText}>Transaction Date:</Text>
-                        <Text style={styles.personalText}>
-                            {formatTransactionDate(data?.data?.transactionDate)}
-                        </Text>
-                    </View>
-                    <View style={styles.buttonContainer}>
-                        <Button
-                            title='Edit Transaction'
-                            onPress={() => setVisible(true)}
-                            style={{ width: '80%' }}
-                        />
-                        <TouchableOpacity onPress={() => setDeleteModalVisible(true)} activeOpacity={0.7} style={styles.deleteButton}>
-                            <Trash2 size={spacing.md} color={colors.white} />
-                        </TouchableOpacity>
-                    </View>
-                </>
-            )}
 
             <Modal
                 visible={visible}

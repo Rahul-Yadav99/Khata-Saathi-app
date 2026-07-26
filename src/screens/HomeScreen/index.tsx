@@ -42,7 +42,7 @@ const HomeScreen = () => {
             refetch()
         },
         onError: (error: any) => {
-            toast.error(error?.message || 'Failed to create party')
+            toast.error(error || 'Failed to create party')
         }
     })
 

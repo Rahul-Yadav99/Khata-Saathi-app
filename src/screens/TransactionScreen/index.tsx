@@ -50,8 +50,6 @@ const TransactionScreen = ({ partyId }: any) => {
         queryFn: () => transactionService.getTransaction(partyId),
     })
 
-    console.log('data----->', data)
-
     const handleAddTransaction = () => {
         if (!transactionAmount || transactionAmount.trim() === '') {
             toast.warning("Please enter amount");
@@ -121,7 +119,7 @@ const TransactionScreen = ({ partyId }: any) => {
                     <Avatar name={data?.party?.partyName || "Customer"} backgroundColor={colors.primaryColor} size='sm' />
                     <Text style={styles.userName}>{data?.party?.partyName || "Customer"}</Text>
                 </View>
-                <SettingButton />
+                <SettingButton partyId={partyId} />
             </View>
 
             <FlatList
