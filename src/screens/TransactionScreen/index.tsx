@@ -39,9 +39,10 @@ const TransactionScreen = ({ partyId }: any) => {
     ]
 
     const [visible, setVisible] = useState(false);
-    const [transactionType, setTransactionType] = useState('')
+    const [transactionType, setTransactionType] = useState('');
     const [showDate, setShowDate] = useState(false);
-    const [transactionAmount, setTransactionAmount] = useState('')
+    const [transactionAmount, setTransactionAmount] = useState('');
+    const [description, setDescription] = useState('');
     const [transactionDate, setTransactionDate] = useState(new Date());
 
     const { data, isLoading, isError, refetch } = useQuery({
@@ -67,11 +68,22 @@ const TransactionScreen = ({ partyId }: any) => {
             return;
         }
 
+        if (description.trim() && description.trim().length <= 3) {
+            toast.warning('Please enter a note atleast 4 characters')
+            return;
+        }
+
+        if (description.trim() && description.trim().length > 50) {
+            toast.warning('Please enter a note less than 50 characters')
+            return;
+        }
+
         let payload = {
             transactionType,
             transactionAmount: amountNumber,   // yahan number jayega
             transactionDate,
-            partyId
+            partyId,
+            description
         }
 
         createTransaction(payload)
@@ -168,7 +180,7 @@ const TransactionScreen = ({ partyId }: any) => {
             >
                 <SafeScreen edges={['top', 'bottom']}>
                     <View style={styles.header}>
-                        <Text style={styles.modalTitle}>You {transactionType === 'credit' ? 'got' : 'gave'} ₹ {transactionAmount ? formatIndianCurrency(Number(transactionAmount)) : "0"} {transactionType === 'credit' ? 'from' : 'to'} {data?.party?.partyName || "Customer"}</Text>
+                        <Text style={styles.modalTitle}>You {transactionType === 'credit' ? 'got' : 'gave'} {transactionAmount ? formatIndianCurrency(Number(transactionAmount)) : "0"} {transactionType === 'credit' ? 'from' : 'to'} {data?.party?.partyName || "Customer"}</Text>
                         <CloseButton onPress={handleCloseModal} isModal={true} />
                     </View>
                     <Input
@@ -178,13 +190,24 @@ const TransactionScreen = ({ partyId }: any) => {
                         onChangeText={setTransactionAmount}
                         containerStyle={{ marginBottom: spacing.md }}
                         keyboardType='numeric'
+                        required
                     />
-                    <TouchableOpacity onPress={() => setShowDate(true)}>
-                        <View style={styles.dateContainer}>
-                            <Calendar1 color={colors.primaryColor} size={moderateScale(20)} />
+                    <Input
+                        label='Note (optional)'
+                        placeholder='Enter Note'
+                        value={description}
+                        onChangeText={setDescription}
+                        containerStyle={{ marginBottom: spacing.md }}
+                        keyboardType='default'
+                    />
+                    <Button
+                        onPress={() => setShowDate(true)}
+                        title='Select Date'
+                        variant='secondary'
+                        icon={<Calendar1 color={colors.primaryColor} size={moderateScale(18)} />}
+                        style={{ marginBottom: spacing.md }}
+                    />
 
-                        </View>
-                    </TouchableOpacity>
                     <Button
                         title='Save Transaction'
                         onPress={handleAddTransaction}

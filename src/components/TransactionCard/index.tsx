@@ -12,6 +12,10 @@ const TransactionCard = ({ item }: any) => {
                 </Text>
                 <Text style={styles.balanceAfterTransaction}>Bal. {item?.balanceAfterTransaction > 0 ? '+' : '-'}{formatIndianCurrency(Math.abs(item?.balanceAfterTransaction || 0))}</Text>
 
+                {item?.description && (
+                    <Text numberOfLines={2} style={styles.transactionDate}>Note: {item?.description}</Text>
+                )}
+
                 <Text style={styles.transactionDate}>{formatTransactionDate(item?.transactionDate)}</Text>
 
             </View>
