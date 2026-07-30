@@ -3,7 +3,7 @@ import { Tabs } from 'expo-router'
 import { Activity, EllipsisIcon, IndianRupee, Users2 } from 'lucide-react-native'
 import { moderateScale } from 'react-native-size-matters'
 
-const Layout = () => {
+const TabsLayout = () => {
     return (
         <Tabs
             screenOptions={{
@@ -60,4 +60,4 @@ const Layout = () => {
     )
 }
 
-export default Layout
+export default TabsLayout

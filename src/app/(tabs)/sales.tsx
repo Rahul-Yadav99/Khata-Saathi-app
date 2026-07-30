@@ -1,11 +1,3 @@
-import { Text, View } from 'react-native'
+import SalesScreen from "@/screens/SalesScreen";
 
-const Sales = () => {
-    return (
-        <View>
-            <Text>Sales</Text>
-        </View>
-    )
-}
-
-export default Sales
+export default SalesScreen

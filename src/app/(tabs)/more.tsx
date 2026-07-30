@@ -1,11 +1,3 @@
-import { Text, View } from 'react-native'
+import MoreScreen from "@/screens/MoreScreen";
 
-const More = () => {
-    return (
-        <View>
-            <Text>More</Text>
-        </View>
-    )
-}
-
-export default More
+export default MoreScreen
