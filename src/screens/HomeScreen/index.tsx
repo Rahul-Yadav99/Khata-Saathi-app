@@ -72,7 +72,7 @@ const HomeScreen = () => {
     };
 
     return (
-        <SafeScreen edges={['top', 'bottom']}>
+        <SafeScreen>
             <FlatList
                 data={data?.data ?? []}
                 keyExtractor={(item) => item._id}
